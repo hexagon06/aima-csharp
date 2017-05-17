@@ -12,18 +12,18 @@ namespace aima.core.search.framework
      * @author Ruediger Lunde
      * 
      */
-     public class SearchUtils
+    public class SearchUtils
     {
         /**
 	 * Returns the list of actions corresponding to the complete path to the
 	 * given node or NoOp if path length is one.
-	 */    
-        public static List<Action> getSequenceOfActions(Node node)
+	 */
+        public static List<Action> GetSequenceOfActions(Node node)
         {
-            List<Node> nodes = node.getPathFromRoot();
+            List<Node> nodes = node.GetPathFromRoot();
             List<Action> actions = new List<Action>();
 
-            if(nodes.Count == 1)
+            if (nodes.Count == 1)
             {
                 // I'm at the root node, this indicates I started at the
                 // Goal node, therefore just return a NoOp
@@ -36,32 +36,32 @@ namespace aima.core.search.framework
                 for (int i = 1; i < nodes.Count; i++)
                 {
                     Node node_temp = nodes[i];
-                    actions.Add(node_temp.getAction());
+                    actions.Add(node_temp.GetAction());
                 }
             }
             return actions;
         }
 
         /** Returns an empty action list. */
-        public static List<Action> failure()
+        public static List<Action> Failure()
         {
             return new List<Action>();
         }
 
         /** Checks whether a list of actions is empty. */
-        public static bool isFailure(List<Action> actions)
+        public static bool IsFailure(List<Action> actions)
         {
-            if(actions.Count == 0)
+            if (actions.Count == 0)
             {
                 return true;
             }
             else
             {
                 return false;
-            }      
+            }
 
         }
-        
+
 
         /**
 	 * Calls the goal test of the problem and - if the goal test is effectively
@@ -69,16 +69,16 @@ namespace aima.core.search.framework
 	 * acceptable. Solution checkers can be used to analyze several or all
 	 * solutions with only one search run.
 	 */
-        public static bool isGoalState(Problem p, Node n)
+        public static bool IsGoalState(Problem p, Node n)
         {
             bool isGoal = false;
             IGoalTest gt = p.GetGoalTest();
-            if (gt.IsGoalState(n.getState()))
+            if (gt.IsGoalState(n.GetState()))
             {
-                if (gt is SolutionChecker)
+                if (gt is ISolutionChecker)
                 {
-                    isGoal = ((SolutionChecker)gt).isAcceptableSolution(
-                            getSequenceOfActions(n), n.getState());
+                    isGoal = ((ISolutionChecker)gt).IsAcceptableSolution(
+                            GetSequenceOfActions(n), n.GetState());
                 }
                 else
                 {

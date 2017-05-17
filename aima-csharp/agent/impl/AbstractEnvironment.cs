@@ -92,7 +92,7 @@ namespace aima.core.agent.impl
             {
                 if (agent.isAlive())
                 {
-                    Action anAction = agent.execute(getPerceptSeenBy(agent));
+                    Action anAction = agent.Execute(getPerceptSeenBy(agent));
                     EnvironmentState es = executeAction(agent, anAction);
                     updateEnvironmentViewsAgentActed(agent, anAction, es);
                 }

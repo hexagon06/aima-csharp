@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 namespace aima.core.search.framework
-{    
+{
     /**
      * Artificial Intelligence A Modern Approach (3rd Edition): page 78.<br>
      * <br>
@@ -23,9 +23,9 @@ namespace aima.core.search.framework
          * @return the cost, traditionally denoted by g(n), of the path from the
          *         initial state to the node, as indicated by the parent pointers.
          */
-        public double g(Node n)
+        public double G(Node n)
         {
-            return n.getPathCost();
+            return n.GetPathCost();
         }
     }
 }

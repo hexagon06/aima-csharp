@@ -9,9 +9,9 @@ namespace aima.core.environment.eightpuzzle
      * @author Ravi Mohan
      * 
      */
-    public class ManhattanHeuristicFunction : HeuristicFunction
+    public class ManhattanHeuristicFunction : IHeuristicFunction
     {
-	public double h(Object state)
+	public double H(Object state)
 	{
 	    EightPuzzleBoard board = (EightPuzzleBoard)state;
 	    int retVal = 0;

@@ -42,7 +42,7 @@ namespace aima.core.search.online
     public class OnlineDFSAgent : AbstractAgent
     {
 	private OnlineSearchProblem problem;
-	private PerceptToStateFunction ptsFunction;
+	private IPerceptToStateFunction ptsFunction;
 	private readonly TwoKeyHashMap<object, Action, object> result = new TwoKeyHashMap<object, Action, object>();
 	// untried, a table that lists, for each state, the actions not yet tried
 	private readonly Dictionary<object, List<agent.Action>> untried = new Dictionary<object, List<Action>>();
@@ -64,7 +64,7 @@ namespace aima.core.search.online
 	 *            given Percept.
 	 */
 	public OnlineDFSAgent(OnlineSearchProblem problem,
-			PerceptToStateFunction ptsFunction)
+			IPerceptToStateFunction ptsFunction)
 	{
 	    setProblem(problem);
 	    setPerceptToStateFunction(ptsFunction);
@@ -97,7 +97,7 @@ namespace aima.core.search.online
 	 * 
 	 * @return the percept to state function of this agent.
 	 */
-	public PerceptToStateFunction getPerceptToStateFunction()
+	public IPerceptToStateFunction getPerceptToStateFunction()
 	{
 	    return ptsFunction;
 	}
@@ -109,16 +109,16 @@ namespace aima.core.search.online
 	 *            a function which returns the problem state associated with a
 	 *            given Percept.
 	 */
-	public void setPerceptToStateFunction(PerceptToStateFunction ptsFunction)
+	public void setPerceptToStateFunction(IPerceptToStateFunction ptsFunction)
 	{
 	    this.ptsFunction = ptsFunction;
 	}
 
 	// function ONLINE-DFS-AGENT(s') returns an action
 	// inputs: s', a percept that identifies the current state
-	public override Action execute(Percept psDelta)
+	public override Action Execute(Percept psDelta)
 	{
-	    object sDelta = ptsFunction.getState(psDelta);
+	    object sDelta = ptsFunction.GetState(psDelta);
 	    // if GOAL-TEST(s') then return stop
 	    if (goalTest(sDelta))
 	    {

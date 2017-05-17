@@ -16,7 +16,7 @@ namespace aima.core.search.framework
      * 
      * @author Ciaran O'Reilly
      */
-    public interface SolutionChecker : IGoalTest
+    public interface ISolutionChecker : IGoalTest
     {
         /**
          * This method is only called if GoalTest.isGoalState() returns true.
@@ -30,6 +30,6 @@ namespace aima.core.search.framework
          * @return true if the solution is acceptable, false otherwise, which
          *         indicates the search should be continued.
          */
-        bool isAcceptableSolution(List<Action> actions, System.Object goal);
+        bool IsAcceptableSolution(List<Action> actions, System.Object goal);
     }
 }

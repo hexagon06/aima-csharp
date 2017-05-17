@@ -14,7 +14,7 @@ namespace aima.core.environment.map
     public class MapFunctionFactory
     {
 	private static IResultFunction resultFunction;
-	private static PerceptToStateFunction perceptToStateFunction;
+	private static IPerceptToStateFunction perceptToStateFunction;
 
 	public static IActionsFunction getActionsFunction(Map map)
 	{
@@ -61,7 +61,7 @@ namespace aima.core.environment.map
 	    }
 	}
 
-	public static PerceptToStateFunction getPerceptToStateFunction()
+	public static IPerceptToStateFunction getPerceptToStateFunction()
 	{
 	    if (null == perceptToStateFunction)
 	    {
@@ -93,9 +93,9 @@ namespace aima.core.environment.map
 	}
 
 	private class MapPerceptToStateFunction :
-		PerceptToStateFunction
+		IPerceptToStateFunction
 	{
-	    public System.Object getState(Percept p)
+	    public System.Object GetState(Percept p)
 	    {
 		return ((DynamicPercept)p)
 			.getAttribute(DynAttributeNames.PERCEPT_IN);

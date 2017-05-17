@@ -22,7 +22,7 @@ namespace aima.core.agent
 	 * @return the Action to be taken in response to the currently perceived
 	 *         percept.
 	 */
-        Action execute(Percept percept);
+        Action Execute(Percept percept);
 
         /**
 	 * Life-cycle indicator as to the liveness of an Agent.

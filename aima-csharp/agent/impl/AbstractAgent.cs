@@ -31,7 +31,7 @@ namespace aima.core.agent.impl
         }
 
         //START-Agent
-        public virtual Action execute(Percept p)
+        public virtual Action Execute(Percept p)
         {
             if(null != program)
             {

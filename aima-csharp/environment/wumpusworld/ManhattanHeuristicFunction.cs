@@ -11,7 +11,7 @@ namespace aima.core.environment.wumpusworld
      * @author Alessandro Daniele
      * @author Ciaran O'Reilly
      */
-    public class ManhattanHeuristicFunction : HeuristicFunction
+    public class ManhattanHeuristicFunction : IHeuristicFunction
     {
 	List<Room> goals = new List<Room>();
 
@@ -20,7 +20,7 @@ namespace aima.core.environment.wumpusworld
 	    this.goals.AddRange(goals);
 	}
 
-	public double h(Object state)
+	public double H(Object state)
 	{
 	    AgentPosition pos = (AgentPosition)state;
 	    int nearestGoalDist = int.MaxValue;

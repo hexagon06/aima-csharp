@@ -42,7 +42,7 @@ namespace aima.core.logic.propositional.agent
 	}
 
 	// function KB-AGENT(percept) returns an action
-	public override Action execute(Percept percept)
+	public override Action Execute(Percept percept)
 	{
 	    // TELL(KB, MAKE-PERCEPT-SENTENCE(percept, t))
 	    KB.tell(makePerceptSentence(percept, t));

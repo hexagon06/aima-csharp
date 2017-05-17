@@ -12,8 +12,8 @@ namespace aima.core.search.framework
      * @author Ciaran O'Reilly
      * 
      */
-    public interface EvaluationFunction
+    public interface IEvaluationFunction
     {
-        double f(Node n);
+        double F(Node n);
     }
 }

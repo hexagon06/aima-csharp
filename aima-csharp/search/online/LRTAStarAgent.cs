@@ -47,8 +47,8 @@ namespace aima.core.search.online
     public class LRTAStarAgent : AbstractAgent
     {
 	private OnlineSearchProblem problem;
-	private PerceptToStateFunction ptsFunction;
-	private HeuristicFunction hf;
+	private IPerceptToStateFunction ptsFunction;
+	private IHeuristicFunction hf;
 	// persistent: result, a table, indexed by state and action, initially empty
 	private readonly TwoKeyHashMap<object, Action, object> result = new TwoKeyHashMap<object, Action, object>();
 	// H, a table of cost estimates indexed by state, initially empty
@@ -72,7 +72,7 @@ namespace aima.core.search.online
 	 *            state.
 	 */
 	public LRTAStarAgent(OnlineSearchProblem problem,
-			PerceptToStateFunction ptsFunction, HeuristicFunction hf)
+			IPerceptToStateFunction ptsFunction, IHeuristicFunction hf)
 	{
 	    setProblem(problem);
 	    setPerceptToStateFunction(ptsFunction);
@@ -106,7 +106,7 @@ namespace aima.core.search.online
 	 * 
 	 * @return the percept to state function of this agent.
 	 */
-	public PerceptToStateFunction getPerceptToStateFunction()
+	public IPerceptToStateFunction getPerceptToStateFunction()
 	{
 	    return ptsFunction;
 	}
@@ -118,7 +118,7 @@ namespace aima.core.search.online
 	 *            a function which returns the problem state associated with a
 	 *            given Percept.
 	 */
-	public void setPerceptToStateFunction(PerceptToStateFunction ptsFunction)
+	public void setPerceptToStateFunction(IPerceptToStateFunction ptsFunction)
 	{
 	    this.ptsFunction = ptsFunction;
 	}
@@ -126,7 +126,7 @@ namespace aima.core.search.online
 	/**
 	 * Returns the heuristic function of this agent.
 	 */
-	public HeuristicFunction getHeuristicFunction()
+	public IHeuristicFunction getHeuristicFunction()
 	{
 	    return hf;
 	}
@@ -139,16 +139,16 @@ namespace aima.core.search.online
 	 *            the cheapest path from the state at node <em>n</em> to a goal
 	 *            state.
 	 */
-	public void setHeuristicFunction(HeuristicFunction hf)
+	public void setHeuristicFunction(IHeuristicFunction hf)
 	{
 	    this.hf = hf;
 	}
 
 	// function LRTA*-AGENT(s') returns an action
 	// inputs: s', a percept that identifies the current state
-	public override Action execute(Percept psDelta)
+	public override Action Execute(Percept psDelta)
 	{
-	    object sDelta = ptsFunction.getState(psDelta);
+	    object sDelta = ptsFunction.GetState(psDelta);
 	    // if GOAL-TEST(s') then return stop
 	    if(goalTest(sDelta))
 	    {
@@ -159,7 +159,7 @@ namespace aima.core.search.online
 		// if s' is a new state (not in H) then H[s'] <- h(s')
 		if(!H.ContainsKey(sDelta))
 		{
-		    H.Add(sDelta, getHeuristicFunction().h(sDelta));
+		    H.Add(sDelta, getHeuristicFunction().H(sDelta));
 		}
 		// if s is not null
 		if(null != s)
@@ -231,7 +231,7 @@ namespace aima.core.search.online
 	    // if s' is undefined then return h(s)
 	    if (null == sDelta)
 	    {
-		return getHeuristicFunction().h(s);
+		return getHeuristicFunction().H(s);
 	    }
 	    // else return c(s, a, s') + H[s']
 	    return getProblem().getStepCostFunction().Calculate(s, action, sDelta)

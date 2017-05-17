@@ -12,7 +12,7 @@ namespace aima.core.search.framework
      * @author Ciaran O'Reilly
      * 
      */
-     public interface PerceptToStateFunction
+    public interface IPerceptToStateFunction
     {
         /**
 	 * Get the problem state associated with a Percept.
@@ -21,6 +21,6 @@ namespace aima.core.search.framework
 	 *            the percept to be transformed to a problem state.
 	 * @return a problem state derived from the Percept p.
 	 */
-        Object getState(Percept p);
+        Object GetState(Percept p);
     }
 }

@@ -27,7 +27,7 @@ namespace aima.core.search.framework
      * @author Ciaran O'Reilly
      * @author Mike Stampone
      */
-     public class Node
+    public class Node
     {
         // n.STATE: the state in the state space to which the node corresponds;
         private System.Object state;
@@ -70,8 +70,8 @@ namespace aima.core.search.framework
     	 *            the root's path costs plus the step costs for executing
     	 *            the the specified action.
     	 */
-        public Node(System.Object state, Node parent, Action action, double stepCost) : this(state) 
-        {            
+        public Node(System.Object state, Node parent, Action action, double stepCost) : this(state)
+        {
             this.parent = parent;
             this.action = action;
             this.pathCost = parent.pathCost + stepCost;
@@ -82,7 +82,7 @@ namespace aima.core.search.framework
 	 * 
 	 * @return the state in the state space to which the node corresponds.
 	 */
-        public System.Object getState()
+        public System.Object GetState()
         {
             return state;
         }
@@ -92,7 +92,7 @@ namespace aima.core.search.framework
     	 * 
     	 * @return the node's parenet node, from which this node was generated.
     	 */
-        public Node getParent()
+        public Node GetParent()
         {
             return parent;
         }
@@ -102,7 +102,7 @@ namespace aima.core.search.framework
 	 * 
     	 * @return the action that was applied to the parent to generate the node.
     	 */
-        public Action getAction()
+        public Action GetAction()
         {
             return action;
         }
@@ -114,7 +114,7 @@ namespace aima.core.search.framework
 	 * @return the cost of the path from the initial state to this node as
     	 *         indicated by the parent pointers.
     	 */
-        public double getPathCost()
+        public double GetPathCost()
         {
             return pathCost;
         }
@@ -124,7 +124,7 @@ namespace aima.core.search.framework
 	 * 
 	 * @return <code>true</code> if the node has no parent.
 	 */
-        public bool isRootNode()
+        public bool IsRootNode()
         {
             return parent == null;
         }
@@ -134,24 +134,24 @@ namespace aima.core.search.framework
 	 * 
     	 * @return the path from the root node to this node.
     	 */
-        public List<Node> getPathFromRoot()
+        public List<Node> GetPathFromRoot()
         {
             List<Node> path = new List<Node>();
             Node current = this;
-            while (!current.isRootNode())
+            while (!current.IsRootNode())
             {
                 path.Insert(0, current);
-                current = current.getParent();
+                current = current.GetParent();
             }
             // ensure the root node is added
             path.Insert(0, current);
             return path;
         }
 
-        public override System.String ToString()
+        public override string ToString()
         {
             return "[parent=" + parent + ", action=" + action + ", state="
-                    + getState() + ", pathCost=" + pathCost + "]";
+                    + GetState() + ", pathCost=" + pathCost + "]";
         }
     }
 }

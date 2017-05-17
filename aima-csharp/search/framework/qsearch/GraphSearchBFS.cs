@@ -70,10 +70,10 @@ namespace aima.core.search.framework.qsearch
         /// <param name="node"></param>
         protected override void AddToFrontier(Node node)
         {
-            if (!explored.Contains(node.getState()) && !frontierStates.Contains(node.getState()))
+            if (!explored.Contains(node.GetState()) && !frontierStates.Contains(node.GetState()))
             {
                 frontier.Enqueue(node);
-                frontierStates.Add(node.getState());
+                frontierStates.Add(node.GetState());
                 UpdateMetrics(frontier.Count);
             }
         }
@@ -86,8 +86,8 @@ namespace aima.core.search.framework.qsearch
         protected override Node RemoveFromFrontier()
         {
             Node result = frontier.Dequeue();
-            explored.Add(result.getState());
-            frontierStates.Remove(result.getState());
+            explored.Add(result.GetState());
+            frontierStates.Remove(result.GetState());
             UpdateMetrics(frontier.Count);
             return result;
         }

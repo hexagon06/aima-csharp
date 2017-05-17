@@ -9,7 +9,7 @@ namespace aima.core.search.framework
      * @author Ravi Mohan
      * @author Ruediger Lunde
      */
-     public class Metrics
+    public class Metrics
     {
         private Dictionary<String, String> hash;
 
@@ -18,52 +18,52 @@ namespace aima.core.search.framework
             this.hash = new Dictionary<String, String>();
         }
 
-        public void set(String name, int i)
+        public void Set(String name, int i)
         {
             hash[name] = i.ToString();
         }
 
-        public void set(String name, double d)
+        public void Set(String name, double d)
         {
             hash[name] = d.ToString();
         }
 
-        public void incrementInt(String name)
+        public void IncrementInt(String name)
         {
-            set(name, getInt(name) + 1);
+            Set(name, GetInt(name) + 1);
         }
 
-        public void set(String name, long l)
+        public void Set(String name, long l)
         {
             hash[name] = l.ToString();
         }
 
-        public int getInt(String name)
+        public int GetInt(String name)
         {
             return int.Parse(hash[name]);
         }
 
-        public double getDouble(String name)
+        public double GetDouble(String name)
         {
             return double.Parse(hash[name]);
         }
 
-        public long getLong(String name)
+        public long GetLong(String name)
         {
             return long.Parse(hash[name]);
         }
 
-        public String get(String name)
+        public String Get(String name)
         {
             return hash[name];
         }
 
-        public HashSet<String> keySet()
+        public HashSet<String> KeySet()
         {
             return new HashSet<string>(hash.Keys);
         }
 
-        public String toString()
+        override public String ToString()
         {
             SortedDictionary<String, String> map = new SortedDictionary<String, String>(hash);
             return map.ToString();

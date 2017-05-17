@@ -17,18 +17,18 @@ namespace aima.core.environment.map
 	protected DynamicState state = new DynamicState();
 
 	private EnvironmentViewNotifier notifier = null;
-	private Search _search = null;
+	private ISearch _search = null;
 	private String[] goals = null;
 	private int goalTestPos = 0;
 
-	public MapAgent(Map map, EnvironmentViewNotifier notifier, Search search)
+	public MapAgent(Map map, EnvironmentViewNotifier notifier, ISearch search)
 	{
 	    this.map = map;
 	    this.notifier = notifier;
 	    this._search = search;
 	}
 
-	public MapAgent(Map map, EnvironmentViewNotifier notifier, Search search,
+	public MapAgent(Map map, EnvironmentViewNotifier notifier, ISearch search,
 			int maxGoalsToFormulate): base(maxGoalsToFormulate)
 	{	    
 	    this.map = map;
@@ -36,7 +36,7 @@ namespace aima.core.environment.map
 	    this._search = search;
 	}
 
-	public MapAgent(Map map, EnvironmentViewNotifier notifier, Search search,
+	public MapAgent(Map map, EnvironmentViewNotifier notifier, ISearch search,
 			String[] goals): base(goals.Length)
 	{	    
 	    this.map = map;
@@ -48,7 +48,7 @@ namespace aima.core.environment.map
 
 	// PROTECTED METHODS
 	
-	protected override State updateState(Percept p)
+	protected override State UpdateState(Percept p)
 	{
 	    DynamicPercept dp = (DynamicPercept)p;
 
@@ -57,7 +57,7 @@ namespace aima.core.environment.map
 	    return state;
 	}
 
-	protected override Object formulateGoal()
+	protected override Object FormulateGoal()
 	{
 	    Object goal = null;
 	    if (null == goals)
@@ -75,19 +75,19 @@ namespace aima.core.environment.map
 	    return goal;
 	}
 
-	protected override Problem formulateProblem(Object goal)
+	protected override Problem FormulateProblem(Object goal)
 	{
 	    return new BidirectionalMapProblem(map,
 			    (String)state.getAttribute(DynAttributeNames.AGENT_LOCATION),
 			    (String)goal);
 	}
 	
-	protected override List<agent.Action> search(Problem problem)
+	protected override List<agent.Action> Search(Problem problem)
 	{
 	    List<agent.Action> actions = new List<agent.Action>();
 	    try
 	    {
-		List<agent.Action> sactions = _search.search(problem);
+		List<agent.Action> sactions = _search.Search(problem);
 		foreach (agent.Action action in sactions)
 		{
 		    actions.Add(action);
@@ -100,13 +100,13 @@ namespace aima.core.environment.map
 	    return actions;
 	}
 
-	protected override void notifyViewOfMetrics()
+	protected override void NotifyViewOfMetrics()
 	{
-	    HashSet<String> keys = _search.getMetrics().keySet();
+	    HashSet<String> keys = _search.GetMetrics().KeySet();
 	    foreach (String key in keys)
 	    {
 		notifier.notifyViews("METRIC[" + key + "]="
-				+ _search.getMetrics().get(key));
+				+ _search.GetMetrics().Get(key));
 	    }
 	}
 

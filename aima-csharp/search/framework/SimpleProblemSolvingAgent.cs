@@ -36,7 +36,7 @@ namespace aima.core.search.framework
      * @author Ciaran O'Reilly
      * @author Mike Stampone
      */
-     public abstract class SimpleProblemSolvingAgent : AbstractAgent
+    public abstract class SimpleProblemSolvingAgent : AbstractAgent
     {
 
         // seq, an action sequence, initially empty
@@ -53,7 +53,7 @@ namespace aima.core.search.framework
 	 * Constructs a simple problem solving agent which will formulate goals
     	 * indefinitely.
     	 */
-         public SimpleProblemSolvingAgent()
+        public SimpleProblemSolvingAgent()
         {
             formulateGoalsIndefinitely = true;
         }
@@ -65,19 +65,19 @@ namespace aima.core.search.framework
     	 * @param maxGoalsToFormulate
     	 *            the maximum number of goals this agent is to formulate.
 	 */
-         public SimpleProblemSolvingAgent(int maxGoalsToFormulate)
+        public SimpleProblemSolvingAgent(int maxGoalsToFormulate)
         {
             formulateGoalsIndefinitely = false;
             this.maxGoalsToFormulate = maxGoalsToFormulate;
         }
 
         // function SIMPLE-PROBLEM-SOLVING-AGENT(percept) returns an action
-        public override Action execute(Percept p)
+        public override Action Execute(Percept p)
         {
             Action action = NoOpAction.NO_OP;
 
             // state <- UPDATE-STATE(state, percept)
-            updateState(p);
+            UpdateState(p);
             // if seq is empty then do
             if (0 == seq.Count)
             {
@@ -86,15 +86,15 @@ namespace aima.core.search.framework
                 {
                     if (goalsFormulated > 0)
                     {
-                        notifyViewOfMetrics();
+                        NotifyViewOfMetrics();
                     }
                     // goal <- FORMULATE-GOAL(state)
-                    System.Object goal = formulateGoal();
+                    System.Object goal = FormulateGoal();
                     goalsFormulated++;
                     // problem <- FORMULATE-PROBLEM(state, goal)
-                    Problem problem = formulateProblem(goal);
+                    Problem problem = FormulateProblem(goal);
                     // seq <- SEARCH(problem)
-                    seq.AddRange(search(problem));
+                    seq.AddRange(Search(problem));
                     if (0 == seq.Count)
                     {
                         // Unable to identify a path
@@ -106,7 +106,7 @@ namespace aima.core.search.framework
                     // Agent no longer wishes to
                     // achieve any more goals
                     setAlive(false);
-                    notifyViewOfMetrics();
+                    NotifyViewOfMetrics();
                 }
             }
 
@@ -122,15 +122,15 @@ namespace aima.core.search.framework
         }
 
         // PROTECTED METHODS
-        
-        protected abstract State updateState(Percept p);
 
-        protected abstract System.Object formulateGoal();
+        protected abstract State UpdateState(Percept p);
 
-        protected abstract Problem formulateProblem(System.Object goal);
+        protected abstract System.Object FormulateGoal();
 
-        protected abstract List<Action> search(Problem problem);
+        protected abstract Problem FormulateProblem(System.Object goal);
 
-        protected abstract void notifyViewOfMetrics();
+        protected abstract List<Action> Search(Problem problem);
+
+        protected abstract void NotifyViewOfMetrics();
     }
 }

@@ -72,7 +72,7 @@ namespace aima.core.search.framework.qsearch
         /// </summary>
         protected override void AddToFrontier(Node node)
         {
-            if (!explored.Contains(node.getState()))
+            if (!explored.Contains(node.GetState()))
             {
                 frontier.Enqueue(node);
                 UpdateMetrics(frontier.Count);
@@ -90,7 +90,7 @@ namespace aima.core.search.framework.qsearch
         {
             Node result = frontier.Dequeue();
             // add the node to the explored set
-            explored.Add(result.getState());
+            explored.Add(result.GetState());
             UpdateMetrics(frontier.Count);
             return result;
         }
@@ -102,7 +102,7 @@ namespace aima.core.search.framework.qsearch
         /// <returns></returns>
         protected override bool IsFrontierEmpty()
         {
-            while (!(frontier.Count == 0) && explored.Contains(frontier.Peek().getState()))
+            while (!(frontier.Count == 0) && explored.Contains(frontier.Peek().GetState()))
             {
                 frontier.Dequeue();
             }

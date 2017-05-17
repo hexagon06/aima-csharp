@@ -12,8 +12,8 @@ namespace aima.core.search.framework
      * @author Ruediger Lunde
      *
      */
-    public interface SearchForActions : Search
+    public interface ISearchForActions : ISearch
     {
-        NodeExpander getNodeExpander();
+        NodeExpander GetNodeExpander();
     }
 }

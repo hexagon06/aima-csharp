@@ -9,7 +9,7 @@ namespace aima.core.search.framework
      * @author Ravi Mohan
      * 
      */
-     public class SearchAgent : AbstractAgent
+    public class SearchAgent : AbstractAgent
     {
         protected List<Action> actionList;
 
@@ -17,14 +17,14 @@ namespace aima.core.search.framework
 
         private Metrics searchMetrics;
 
-        public SearchAgent(Problem p, Search search)
+        public SearchAgent(Problem p, ISearch search)
         {
-            actionList = search.search(p);
+            actionList = search.Search(p);
             actionIterator = actionList.GetEnumerator();
-            searchMetrics = search.getMetrics();
+            searchMetrics = search.GetMetrics();
         }
 
-        public override Action execute(Percept p)
+        public override Action Execute(Percept p)
         {
 
             if (actionIterator.MoveNext())
@@ -37,22 +37,22 @@ namespace aima.core.search.framework
             }
         }
 
-        public bool isDone()
+        public bool IsDone()
         {
             return null != actionIterator.Current;
         }
 
-        public List<Action> getActions()
+        public List<Action> GetActions()
         {
             return actionList;
         }
 
-        public Dictionary<string, string> getInstrumentation()
+        public Dictionary<string, string> GetInstrumentation()
         {
             Dictionary<string, string> retVal = new Dictionary<string, string>();
-            foreach (string key in searchMetrics.keySet())
+            foreach (string key in searchMetrics.KeySet())
             {
-                System.String value = searchMetrics.get(key);
+                System.String value = searchMetrics.Get(key);
                 retVal.Add(key, value);
             }
             return retVal;

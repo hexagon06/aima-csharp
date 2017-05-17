@@ -16,7 +16,7 @@ namespace aima.core.search.framework
     {
         // expanding nodes
 
-        public Node createRootNode(System.Object state)
+        public Node CreateRootNode(System.Object state)
         {
             return new Node(state);
         }
@@ -26,9 +26,9 @@ namespace aima.core.search.framework
 	 * parent node state to the specified state, creates a new node for the
 	 * specified state, adds it as child of the provided parent, and returns it.
 	 */
-         public Node createNode(System.Object state, Node parent, Action action, double stepCost)
+         public Node CreateNode(System.Object state, Node parent, Action action, double stepCost)
         {
-            return new Node(state, parent, action, parent.getPathCost() + stepCost);
+            return new Node(state, parent, action, parent.GetPathCost() + stepCost);
         }
 
         /**
@@ -43,7 +43,7 @@ namespace aima.core.search.framework
     	 * @return the children obtained from expanding the specified node in the
     	 *         specified problem.
     	 */
-        public List<Node> expand(Node node, Problem problem)
+        public List<Node> Expand(Node node, Problem problem)
         {
             List<Node> successors = new List<Node>();
 
@@ -51,12 +51,12 @@ namespace aima.core.search.framework
             IResultFunction resultFunction = problem.GetResultFunction();
             IStepCostFunction stepCostFunction = problem.GetStepCostFunction();
 
-            foreach (Action action in actionsFunction.Actions(node.getState()))
+            foreach (Action action in actionsFunction.Actions(node.GetState()))
             {
-                System.Object successorState = resultFunction.Result(node.getState(), action);
+                System.Object successorState = resultFunction.Result(node.GetState(), action);
 
-                double stepCost = stepCostFunction.Calculate(node.getState(), action, successorState);
-                successors.Add(createNode(successorState, node, action, stepCost));
+                double stepCost = stepCostFunction.Calculate(node.GetState(), action, successorState);
+                successors.Add(CreateNode(successorState, node, action, stepCost));
             }
 
             foreach (NodeListener listener in nodeListeners)
@@ -88,7 +88,7 @@ namespace aima.core.search.framework
     	 * Adds a listener to the list of node listeners. It is informed whenever a
 	 * node is expanded during search.
 	 */
-        public void addNodeListener(NodeListener listener)
+        public void AddNodeListener(NodeListener listener)
         {
             nodeListeners.Add(listener);
         }
@@ -96,7 +96,7 @@ namespace aima.core.search.framework
         /**
     	 * Resets the counter for {@link #expand(Node, Problem)} calls.
     	 */
-        public void resetCounter()
+        public void ResetCounter()
         {
             counter = 0;
         }
@@ -105,7 +105,7 @@ namespace aima.core.search.framework
 	 * Returns the number of {@link #expand(Node, Problem)} calls since the last
 	 * counter reset.
 	 */
-        public int getNumOfExpandCalls()
+        public int GetNumOfExpandCalls()
         {
             return counter;
         }

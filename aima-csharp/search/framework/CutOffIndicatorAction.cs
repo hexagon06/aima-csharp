@@ -15,13 +15,13 @@ namespace aima.core.search.framework
         public static readonly CutOffIndicatorAction CUT_OFF = new CutOffIndicatorAction();
 
         // START-Action
-        public bool isNoOp()
+        public bool IsNoOp()
         {
             return true;
         }
 
         // END-Action
-        private CutOffIndicatorAction(): base("CutOff")
+        private CutOffIndicatorAction() : base("CutOff")
         {
 
         }

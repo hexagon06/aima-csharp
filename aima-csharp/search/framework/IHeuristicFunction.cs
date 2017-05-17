@@ -16,8 +16,8 @@ namespace aima.core.search.framework
      * @author Ravi Mohan
      * 
      */
-     public interface HeuristicFunction
+    public interface IHeuristicFunction
     {
-        double h(Object state);
+        double H(Object state);
     }
 }

@@ -61,10 +61,10 @@ namespace aima.core.search.framework.qsearch
             this.frontier = frontier;
             ClearInstrumentation();
             // initialize the frontier using the initial state of the problem
-            Node root = nodeExpander.createRootNode(problem.GetInitialState());
+            Node root = nodeExpander.CreateRootNode(problem.GetInitialState());
             if (earlyGoalCheck)
             {
-                if (SearchUtils.isGoalState(problem, root))
+                if (SearchUtils.IsGoalState(problem, root))
                 {
                     return GetSolution(root);
                 }
@@ -80,18 +80,18 @@ namespace aima.core.search.framework.qsearch
                 {
                     // if the node contains a goal state then return the
                     // corresponding solution
-                    if (SearchUtils.isGoalState(problem, nodeToExpand))
+                    if (SearchUtils.IsGoalState(problem, nodeToExpand))
                     {
                         return GetSolution(nodeToExpand);
                     }
                 }
                 // expand the chosen node, adding the resulting nodes to the
                 // frontier
-                foreach (Node successor in nodeExpander.expand(nodeToExpand, problem))
+                foreach (Node successor in nodeExpander.Expand(nodeToExpand, problem))
                 {
                     if (earlyGoalCheck)
                     {
-                        if (SearchUtils.isGoalState(problem, successor))
+                        if (SearchUtils.IsGoalState(problem, successor))
                         {
                             return GetSolution(successor);
                         }
@@ -101,7 +101,7 @@ namespace aima.core.search.framework.qsearch
                 }
             }
             // if the frontier is empty then return failure
-            return SearchUtils.failure();
+            return SearchUtils.Failure();
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace aima.core.search.framework.qsearch
         /// <returns>all the search metrics.</returns>
         public virtual Metrics GetMetrics()
         {
-            metrics.set(METRIC_NODES_EXPANDED, nodeExpander.getNumOfExpandCalls());
+            metrics.Set(METRIC_NODES_EXPANDED, nodeExpander.GetNumOfExpandCalls());
             return metrics;
         }
 
@@ -146,27 +146,27 @@ namespace aima.core.search.framework.qsearch
         /// </summary>
         public void ClearInstrumentation()
         {
-            nodeExpander.resetCounter();
-            metrics.set(METRIC_NODES_EXPANDED, 0);
-            metrics.set(METRIC_QUEUE_SIZE, 0);
-            metrics.set(METRIC_MAX_QUEUE_SIZE, 0);
-            metrics.set(METRIC_PATH_COST, 0);
+            nodeExpander.ResetCounter();
+            metrics.Set(METRIC_NODES_EXPANDED, 0);
+            metrics.Set(METRIC_QUEUE_SIZE, 0);
+            metrics.Set(METRIC_MAX_QUEUE_SIZE, 0);
+            metrics.Set(METRIC_PATH_COST, 0);
         }
 
         protected void UpdateMetrics(int queueSize)
         {
-            metrics.set(METRIC_QUEUE_SIZE, queueSize);
-            int maxQSize = metrics.getInt(METRIC_MAX_QUEUE_SIZE);
+            metrics.Set(METRIC_QUEUE_SIZE, queueSize);
+            int maxQSize = metrics.GetInt(METRIC_MAX_QUEUE_SIZE);
             if (queueSize > maxQSize)
             {
-                metrics.set(METRIC_MAX_QUEUE_SIZE, queueSize);
+                metrics.Set(METRIC_MAX_QUEUE_SIZE, queueSize);
             }
         }
 
         private List<Action> GetSolution(Node node)
         {
-            metrics.set(METRIC_PATH_COST, node.getPathCost());
-            return SearchUtils.getSequenceOfActions(node);
+            metrics.Set(METRIC_PATH_COST, node.GetPathCost());
+            return SearchUtils.GetSequenceOfActions(node);
         }
     }
 }
