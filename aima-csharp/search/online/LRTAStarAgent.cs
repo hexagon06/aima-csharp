@@ -234,13 +234,13 @@ namespace aima.core.search.online
 		return getHeuristicFunction().h(s);
 	    }
 	    // else return c(s, a, s') + H[s']
-	    return getProblem().getStepCostFunction().c(s, action, sDelta)
+	    return getProblem().getStepCostFunction().Calculate(s, action, sDelta)
 			    + H[sDelta];
 	}
 
 	private HashSet<Action> actions(object state)
 	{
-	    return problem.getActionsFunction().actions(state);
+	    return problem.getActionsFunction().Actions(state);
 	}
     }
 }

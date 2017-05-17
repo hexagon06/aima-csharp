@@ -8,7 +8,7 @@ namespace aima.core.environment.map
      * @author Ciaran O'Reilly
      * 
      */
-    public class BidirectionalMapProblem : Problem, BidirectionalProblem
+    public class BidirectionalMapProblem : Problem, IBidirectionalProblem
     {
 	Map map;
 
@@ -19,7 +19,7 @@ namespace aima.core.environment.map
 	    
 	}
 
-	public BidirectionalMapProblem(Map map, String initialState, String goalState, GoalTest goalTest) :  base(initialState, MapFunctionFactory.getActionsFunction(map), MapFunctionFactory.getResultFunction(),
+	public BidirectionalMapProblem(Map map, String initialState, String goalState, IGoalTest goalTest) :  base(initialState, MapFunctionFactory.getActionsFunction(map), MapFunctionFactory.getResultFunction(),
 			    goalTest, new MapStepCostFunction(map))
 	{ 
 	    this.map = map;
@@ -30,12 +30,12 @@ namespace aima.core.environment.map
 	}
 
 	// START Interface BidrectionalProblem
-	public Problem getOriginalProblem()
+	public Problem GetOriginalProblem()
 	{
 	    return this;
 	}
 
-	public Problem getReverseProblem()
+	public Problem GetReverseProblem()
 	{
 	    return reverseProblem;
 	}

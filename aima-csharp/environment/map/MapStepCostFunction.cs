@@ -12,7 +12,7 @@ namespace aima.core.environment.map
      * @author Ciaran O'Reilly
      * 
      */
-    public class MapStepCostFunction : StepCostFunction
+    public class MapStepCostFunction : IStepCostFunction
     {
 	private Map map = null;
 		
@@ -27,7 +27,7 @@ namespace aima.core.environment.map
 
 	//
 	// START-StepCostFunction
-	public double c(object fromCurrentState, Action action, object toNextState)
+	public double Calculate(object fromCurrentState, Action action, object toNextState)
 	{
 
 	    string fromLoc = fromCurrentState.ToString();

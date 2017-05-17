@@ -72,8 +72,8 @@ namespace aima.core.search.framework
         public static bool isGoalState(Problem p, Node n)
         {
             bool isGoal = false;
-            GoalTest gt = p.getGoalTest();
-            if (gt.isGoalState(n.getState()))
+            IGoalTest gt = p.GetGoalTest();
+            if (gt.IsGoalState(n.getState()))
             {
                 if (gt is SolutionChecker)
                 {

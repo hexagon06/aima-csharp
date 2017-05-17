@@ -3,16 +3,13 @@ using aima.core.agent;
 
 namespace aima.core.search.framework.problem
 {
-    /**
-     * Returns one for every action.
-     * 
-     * @author Ravi Mohan
-     */
-    public class DefaultStepCostFunction : StepCostFunction
+    /// <summary>
+    /// Returns one for every action.
+    /// </summary>
+    /// <author>Ravi Mohan</author>
+    public class DefaultStepCostFunction : IStepCostFunction
     {
-
-
-        public double c(System.Object stateFrom, Action action, System.Object stateTo)
+        public double Calculate(System.Object stateFrom, Action action, System.Object stateTo)
         {
             return 1;
         }

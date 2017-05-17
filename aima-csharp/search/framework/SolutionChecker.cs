@@ -16,7 +16,7 @@ namespace aima.core.search.framework
      * 
      * @author Ciaran O'Reilly
      */
-    public interface SolutionChecker : GoalTest
+    public interface SolutionChecker : IGoalTest
     {
         /**
          * This method is only called if GoalTest.isGoalState() returns true.

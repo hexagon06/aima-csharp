@@ -59,7 +59,7 @@ namespace aima.core.search.framework.qsearch
             this.frontier = frontier;
             clearInstrumentation();
             // initialize the frontier using the initial state of the problem
-            Node root = nodeExpander.createRootNode(problem.getInitialState());
+            Node root = nodeExpander.createRootNode(problem.GetInitialState());
             if (earlyGoalCheck)
             {
                 if(SearchUtils.isGoalState(problem, root))

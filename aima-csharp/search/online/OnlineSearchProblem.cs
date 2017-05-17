@@ -24,11 +24,11 @@ namespace aima.core.search.online
      */
     public class OnlineSearchProblem
     {
-        protected ActionsFunction actionsFunction;
+        protected IActionsFunction actionsFunction;
 
-        protected StepCostFunction stepCostFunction;
+        protected IStepCostFunction stepCostFunction;
 
-        protected GoalTest goalTest;
+        protected IGoalTest goalTest;
 
 	/**
          * Constructs an online search problem with the specified action function,
@@ -40,8 +40,8 @@ namespace aima.core.search.online
          *            GOAL-TEST(s), which the agent can apply to a single state
          *            description to determine if it is a goal state
          */
-	public OnlineSearchProblem(ActionsFunction actionsFunction,
-                 GoalTest goalTest)
+	public OnlineSearchProblem(IActionsFunction actionsFunction,
+                 IGoalTest goalTest)
 	{
 	    this.actionsFunction = actionsFunction;
 	    this.goalTest = goalTest;
@@ -61,8 +61,8 @@ namespace aima.core.search.online
 	 *            the step-cost function c(s, a, s') - note that this cannot be
 	 *            used until the agent knows that s' is the outcome
 	 */
-	public OnlineSearchProblem(ActionsFunction actionsFunction,
-		GoalTest goalTest, StepCostFunction stepCostFunction)
+	public OnlineSearchProblem(IActionsFunction actionsFunction,
+		IGoalTest goalTest, IStepCostFunction stepCostFunction)
 	{
 	    this.actionsFunction = actionsFunction;
 	    this.goalTest = goalTest;
@@ -74,7 +74,7 @@ namespace aima.core.search.online
 	 * 
 	 * @return the action function of this online search problem.
 	 */
-	public ActionsFunction getActionsFunction()
+	public IActionsFunction getActionsFunction()
 	{
 	    return actionsFunction;
 	}
@@ -89,7 +89,7 @@ namespace aima.core.search.online
 	 */
 	public bool isGoalState(Object state)
 	{
-            return goalTest.isGoalState(state);
+            return goalTest.IsGoalState(state);
 	}
 
 	/**
@@ -97,7 +97,7 @@ namespace aima.core.search.online
 	 * 
 	 * @return the step cost function of this online search problem.
 	 */
-	public StepCostFunction getStepCostFunction()
+	public IStepCostFunction getStepCostFunction()
 	{
 	    return stepCostFunction;
 	}

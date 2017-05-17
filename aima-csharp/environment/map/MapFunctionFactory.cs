@@ -13,20 +13,20 @@ namespace aima.core.environment.map
      */
     public class MapFunctionFactory
     {
-	private static ResultFunction resultFunction;
+	private static IResultFunction resultFunction;
 	private static PerceptToStateFunction perceptToStateFunction;
 
-	public static ActionsFunction getActionsFunction(Map map)
+	public static IActionsFunction getActionsFunction(Map map)
 	{
 	    return new MapActionsFunction(map, false);
 	}
 
-	public static ActionsFunction getReverseActionsFunction(Map map)
+	public static IActionsFunction getReverseActionsFunction(Map map)
 	{
 	    return new MapActionsFunction(map, true);
 	}
 
-	public static ResultFunction getResultFunction()
+	public static IResultFunction getResultFunction()
 	{
 	    if (null == resultFunction)
 	    {
@@ -35,7 +35,7 @@ namespace aima.core.environment.map
 	    return resultFunction;
 	}
 
-	private class MapActionsFunction : ActionsFunction
+	private class MapActionsFunction : IActionsFunction
 	{
 	    private Map map = null;
 	    private bool reverseMode;
@@ -46,7 +46,7 @@ namespace aima.core.environment.map
 		this.reverseMode = reverseMode;
 	    }
 
-	    public HashSet<Action> actions(System.Object state)
+	    public HashSet<Action> Actions(System.Object state)
 	    {
 		HashSet<Action> actions = new HashSet<Action>();
 		System.String location = state.ToString();
@@ -70,13 +70,13 @@ namespace aima.core.environment.map
 	    return perceptToStateFunction;
 	}
 
-	private class MapResultFunction : ResultFunction
+	private class MapResultFunction : IResultFunction
 	{
 	    public MapResultFunction()
 	    {
 	    }
 
-	    public System.Object result(System.Object s, Action a)
+	    public System.Object Result(System.Object s, Action a)
 	    {
 
 		if (a is MoveToAction)

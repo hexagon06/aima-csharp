@@ -47,15 +47,15 @@ namespace aima.core.search.framework
         {
             List<Node> successors = new List<Node>();
 
-            ActionsFunction actionsFunction = problem.getActionsFunction();
-            ResultFunction resultFunction = problem.getResultFunction();
-            StepCostFunction stepCostFunction = problem.getStepCostFunction();
+            IActionsFunction actionsFunction = problem.GetActionsFunction();
+            IResultFunction resultFunction = problem.GetResultFunction();
+            IStepCostFunction stepCostFunction = problem.GetStepCostFunction();
 
-            foreach (Action action in actionsFunction.actions(node.getState()))
+            foreach (Action action in actionsFunction.Actions(node.getState()))
             {
-                System.Object successorState = resultFunction.result(node.getState(), action);
+                System.Object successorState = resultFunction.Result(node.getState(), action);
 
-                double stepCost = stepCostFunction.c(node.getState(), action, successorState);
+                double stepCost = stepCostFunction.Calculate(node.getState(), action, successorState);
                 successors.Add(createNode(successorState, node, action, stepCost));
             }
 

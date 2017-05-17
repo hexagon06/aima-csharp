@@ -219,7 +219,7 @@ namespace aima.core.search.online
 	private List<Action> actions(object state)
 	{
 	    return new List<Action>(problem.getActionsFunction()
-			    .actions(state));
+			    .Actions(state));
 	}
     }
 }
