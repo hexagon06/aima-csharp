@@ -68,13 +68,13 @@ namespace aima.core.search.framework.qsearch
         /// is not already a frontier state and was not yet explored.
         /// </summary>
         /// <param name="node"></param>
-        protected override void addToFrontier(Node node)
+        protected override void AddToFrontier(Node node)
         {
             if (!explored.Contains(node.getState()) && !frontierStates.Contains(node.getState()))
             {
                 frontier.Enqueue(node);
                 frontierStates.Add(node.getState());
-                updateMetrics(frontier.Count);
+                UpdateMetrics(frontier.Count);
             }
         }
 
@@ -83,19 +83,19 @@ namespace aima.core.search.framework.qsearch
         /// state to the explored set, and returns the node.
         /// </summary>
         /// <returns>the node at the head of the frontier.</returns>
-        protected override Node removeFromFrontier()
+        protected override Node RemoveFromFrontier()
         {
             Node result = frontier.Dequeue();
             explored.Add(result.getState());
             frontierStates.Remove(result.getState());
-            updateMetrics(frontier.Count);
+            UpdateMetrics(frontier.Count);
             return result;
         }
 
         /// <summary>
         /// Checks whether there are still some nodes left.
         /// </summary>
-        protected override bool isFrontierEmpty()
+        protected override bool IsFrontierEmpty()
         {
             if (frontier.Count == 0)
             {

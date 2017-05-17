@@ -37,27 +37,27 @@ namespace aima.core.search.framework.qsearch
         /// <summary>
         /// Inserts the node at the tail of the frontier.
         /// </summary>
-        protected override void addToFrontier(Node node)
+        protected override void AddToFrontier(Node node)
         {
             frontier.Enqueue(node);
-            updateMetrics(frontier.Count);
+            UpdateMetrics(frontier.Count);
         }
 
         /// <summary>
         /// Removes and returns the node at the head of the frontier.
         /// </summary>
         /// <returns>the node at the head of the frontier.</returns>
-        protected override Node removeFromFrontier()
+        protected override Node RemoveFromFrontier()
         {
             Node result = frontier.Dequeue();
-            updateMetrics(frontier.Count);
+            UpdateMetrics(frontier.Count);
             return result;
         }
 
         /// <summary>
         /// Checks whether the frontier contains not yet expanded nodes.
         /// </summary>
-        protected override bool isFrontierEmpty()
+        protected override bool IsFrontierEmpty()
         {
             if (frontier.Count == 0)
             {

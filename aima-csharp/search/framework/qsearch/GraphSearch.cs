@@ -70,12 +70,12 @@ namespace aima.core.search.framework.qsearch
         /// Inserts the node at the tail of the frontier if the corresponding state
         /// was not yet explored.
         /// </summary>
-        protected override void addToFrontier(Node node)
+        protected override void AddToFrontier(Node node)
         {
             if (!explored.Contains(node.getState()))
             {
                 frontier.Enqueue(node);
-                updateMetrics(frontier.Count);
+                UpdateMetrics(frontier.Count);
             }
         }
 
@@ -86,12 +86,12 @@ namespace aima.core.search.framework.qsearch
         /// state will always be unexplored yet.
         /// </summary>
         /// <returns>the node at the head of the frontier.</returns>
-        protected override Node removeFromFrontier()
+        protected override Node RemoveFromFrontier()
         {
             Node result = frontier.Dequeue();
             // add the node to the explored set
             explored.Add(result.getState());
-            updateMetrics(frontier.Count);
+            UpdateMetrics(frontier.Count);
             return result;
         }
 
@@ -100,13 +100,13 @@ namespace aima.core.search.framework.qsearch
         /// and checks whether there are still some nodes left.
         /// </summary>
         /// <returns></returns>
-        protected override bool isFrontierEmpty()
+        protected override bool IsFrontierEmpty()
         {
             while (!(frontier.Count == 0) && explored.Contains(frontier.Peek().getState()))
             {
                 frontier.Dequeue();
             }
-            updateMetrics(frontier.Count);
+            UpdateMetrics(frontier.Count);
             if (frontier.Count == 0)
             {
                 return true;

@@ -34,7 +34,7 @@ namespace aima.core.search.framework.qsearch
             this.nodeExpander = nodeExpander;
         }
 
-        public virtual NodeExpander getNodeExpander()
+        public virtual NodeExpander GetNodeExpander()
         {
             return nodeExpander;
         }
@@ -45,10 +45,10 @@ namespace aima.core.search.framework.qsearch
         /// if the goal could not be found.This template method provides a base for
     	/// tree and graph search implementations.It can be customized by overriding
     	/// some primitive operations, especially 
-        /// <see cref="addToFrontier"/>,
-        /// <see cref="removeFromFrontier"/>
+        /// <see cref="AddToFrontier"/>,
+        /// <see cref="RemoveFromFrontier"/>
         /// and
-        /// <see cref="isFrontierEmpty"/>
+        /// <see cref="IsFrontierEmpty"/>
         /// </summary>
         /// <param name="problem">the search problem</param>
         /// <param name="frontier">the collection of nodes that are waiting to be expanded</param>
@@ -59,21 +59,21 @@ namespace aima.core.search.framework.qsearch
         public virtual List<Action> Search(Problem problem, Queue<Node> frontier)
         {
             this.frontier = frontier;
-            clearInstrumentation();
+            ClearInstrumentation();
             // initialize the frontier using the initial state of the problem
             Node root = nodeExpander.createRootNode(problem.GetInitialState());
             if (earlyGoalCheck)
             {
                 if (SearchUtils.isGoalState(problem, root))
                 {
-                    return getSolution(root);
+                    return GetSolution(root);
                 }
             }
-            addToFrontier(root);
+            AddToFrontier(root);
             while (!(frontier.Count == 0))
             {
                 // choose a leaf node and remove it from the frontier
-                Node nodeToExpand = removeFromFrontier();
+                Node nodeToExpand = RemoveFromFrontier();
                 // Only need to check the nodeToExpand if have not already
                 // checked before adding to the frontier
                 if (!earlyGoalCheck)
@@ -82,7 +82,7 @@ namespace aima.core.search.framework.qsearch
                     // corresponding solution
                     if (SearchUtils.isGoalState(problem, nodeToExpand))
                     {
-                        return getSolution(nodeToExpand);
+                        return GetSolution(nodeToExpand);
                     }
                 }
                 // expand the chosen node, adding the resulting nodes to the
@@ -93,10 +93,10 @@ namespace aima.core.search.framework.qsearch
                     {
                         if (SearchUtils.isGoalState(problem, successor))
                         {
-                            return getSolution(successor);
+                            return GetSolution(successor);
                         }
                     }
-                    addToFrontier(successor)
+                    AddToFrontier(successor)
 ;
                 }
             }
@@ -107,26 +107,26 @@ namespace aima.core.search.framework.qsearch
         /// <summary>
         /// Primitive operation which inserts the node at the tail of the frontier.
         /// </summary>
-        protected abstract void addToFrontier(Node node);
+        protected abstract void AddToFrontier(Node node);
 
         /// <summary>
         /// Primitive operation which removes and returns the node at the head of the frontier.
         /// </summary>
         /// <returns>the node at the head of the frontier.</returns>
-        protected abstract Node removeFromFrontier();
+        protected abstract Node RemoveFromFrontier();
         
         /// <summary>
         /// Primitive operation which checks whether the frontier contains not yet
         /// expanded nodes.
         /// </summary>
-        protected abstract bool isFrontierEmpty();
+        protected abstract bool IsFrontierEmpty();
         
         /// <summary>
         /// Enables optimization for FIFO queue based search, especially breadth
         /// first search.
         /// </summary>
         /// <param name="state"></param>
-        public void setEarlyGoalCheck(bool state)
+        public void SetEarlyGoalCheck(bool state)
         {
             this.earlyGoalCheck = state;
         }
@@ -135,7 +135,7 @@ namespace aima.core.search.framework.qsearch
         /// Returns all the search metrics.
         /// </summary>
         /// <returns>all the search metrics.</returns>
-        public virtual Metrics getMetrics()
+        public virtual Metrics GetMetrics()
         {
             metrics.set(METRIC_NODES_EXPANDED, nodeExpander.getNumOfExpandCalls());
             return metrics;
@@ -144,7 +144,7 @@ namespace aima.core.search.framework.qsearch
         /// <summary>
         /// Sets all metrics to zero.
         /// </summary>
-        public void clearInstrumentation()
+        public void ClearInstrumentation()
         {
             nodeExpander.resetCounter();
             metrics.set(METRIC_NODES_EXPANDED, 0);
@@ -153,7 +153,7 @@ namespace aima.core.search.framework.qsearch
             metrics.set(METRIC_PATH_COST, 0);
         }
 
-        protected void updateMetrics(int queueSize)
+        protected void UpdateMetrics(int queueSize)
         {
             metrics.set(METRIC_QUEUE_SIZE, queueSize);
             int maxQSize = metrics.getInt(METRIC_MAX_QUEUE_SIZE);
@@ -163,7 +163,7 @@ namespace aima.core.search.framework.qsearch
             }
         }
 
-        private List<Action> getSolution(Node node)
+        private List<Action> GetSolution(Node node)
         {
             metrics.set(METRIC_PATH_COST, node.getPathCost());
             return SearchUtils.getSequenceOfActions(node);
