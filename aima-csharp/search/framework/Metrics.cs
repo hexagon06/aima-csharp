@@ -3,12 +3,11 @@ using System.Collections.Generic;
 
 namespace aima.core.search.framework
 {
-    /**
-     * Stores key-value pairs for efficiency analysis.
-     * 
-     * @author Ravi Mohan
-     * @author Ruediger Lunde
-     */
+    /// <summary>
+    /// Stores key-value pairs for efficiency analysis.
+    /// </summary>
+    /// <author>Ravi Mohan</author>
+    /// <author>Ruediger Lunde</author>
     public class Metrics
     {
         private Dictionary<String, String> hash;

@@ -4,14 +4,12 @@ using aima.core.search.framework.problem;
 
 namespace aima.core.search.framework
 {
-    /**
-     * Instances of this class are responsible for node creation and expansion. They
-     * compute path costs, support progress tracing, and count the number of
-     * {@link #expand(Node, Problem)} calls.
-     * 
-     * @author Ruediger Lunde
-     *
-     */
+    /// <summary>
+    /// Instances of this class are responsible for node creation and expansion. They
+    /// compute path costs, support progress tracing, and count the number of
+    /// <see cref="Expand(Node, Problem)"/> calls.
+    /// </summary>
+    /// <author>Ruediger Lunde</author>
     public class NodeExpander
     {
         // expanding nodes
@@ -21,28 +19,25 @@ namespace aima.core.search.framework
             return new Node(state);
         }
 
-        /**
-	 * Computes the path cost for getting from the root node state via the
-	 * parent node state to the specified state, creates a new node for the
-	 * specified state, adds it as child of the provided parent, and returns it.
-	 */
-         public Node CreateNode(System.Object state, Node parent, Action action, double stepCost)
+        /// <summary>
+        /// Computes the path cost for getting from the root node state via the
+        /// parent node state to the specified state, creates a new node for the
+        /// specified state, adds it as child of the provided parent, and returns it.
+        /// </summary>
+        public Node CreateNode(System.Object state, Node parent, Action action, double stepCost)
         {
             return new Node(state, parent, action, parent.GetPathCost() + stepCost);
         }
 
-        /**
-	 * Returns the children obtained from expanding the specified node in the
-    	 * specified problem.
-    	 * 
-    	 * @param node
-    	 *            the node to expand
-    	 * @param problem
-    	 *            the problem the specified node is within.
-    	 * 
-    	 * @return the children obtained from expanding the specified node in the
-    	 *         specified problem.
-    	 */
+        /// <summary>
+        /// Returns the children obtained from expanding the specified node in the specified problem.
+        /// </summary>
+        /// <param name="node">the node to expand</param>
+        /// <param name="problem">the problem the specified node is within.</param>
+        /// <returns>
+        /// the children obtained from expanding the specified node in the
+        /// specified problem.
+        /// </returns>
         public List<Node> Expand(Node node, Problem problem)
         {
             List<Node> successors = new List<Node>();
@@ -59,9 +54,9 @@ namespace aima.core.search.framework
                 successors.Add(CreateNode(successorState, node, action, stepCost));
             }
 
-            foreach (NodeListener listener in nodeListeners)
+            foreach (INodeListener listener in nodeListeners)
             {
-                listener.onNodeExpanded(node);
+                listener.OnNodeExpanded(node);
             }
             counter++;
             return successors;
@@ -69,42 +64,46 @@ namespace aima.core.search.framework
 
         // progress tracing and statistical data
 
-        /** Interface for progress Tracers */
-        public interface NodeListener
+        /// <summary>
+        /// Interface for progress Tracers
+        /// </summary>
+        public interface INodeListener
         {
-            void onNodeExpanded(Node node);
+            void OnNodeExpanded(Node node);
         }
 
-        /**
-	 * All node listeners added to this list get informed whenever a node is
-	 * expanded.
-	 */
-        private List<NodeListener> nodeListeners = new List<NodeListener>();
+        /// <summary>
+        /// All node listeners added to this list get informed whenever a node is
+        /// expanded.
+        /// </summary>
+        private List<INodeListener> nodeListeners = new List<INodeListener>();
 
-        /** Counts the number of {@link #expand(Node, Problem)} calls. */
+        /// <summary>
+        /// Counts the number of <see cref="Expand(Node, Problem)"/> calls.
+        /// </summary>
         private int counter;
 
-        /**
-    	 * Adds a listener to the list of node listeners. It is informed whenever a
-	 * node is expanded during search.
-	 */
-        public void AddNodeListener(NodeListener listener)
+        /// <summary>
+        /// Adds a listener to the list of node listeners. It is informed whenever a
+        /// node is expanded during search.
+        /// </summary>
+        public void AddNodeListener(INodeListener listener)
         {
             nodeListeners.Add(listener);
         }
 
-        /**
-    	 * Resets the counter for {@link #expand(Node, Problem)} calls.
-    	 */
+        /// <summary>
+        /// Resets the counter for {@link #expand(Node, Problem)} calls.
+        /// </summary>
         public void ResetCounter()
         {
             counter = 0;
         }
 
-        /**
-	 * Returns the number of {@link #expand(Node, Problem)} calls since the last
-	 * counter reset.
-	 */
+        /// <summary>
+        /// Returns the number of <see cref="Expand(Node, Problem)"/> calls since the last
+        /// counter reset.
+        /// </summary>
         public int GetNumOfExpandCalls()
         {
             return counter;

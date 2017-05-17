@@ -5,10 +5,7 @@ using aima.core.search.framework.problem;
 
 namespace aima.core.search.framework
 {
-    /**
-     * @author Ravi Mohan
-     * 
-     */
+    /// <author>Ravi Mohan</author>
     public class SearchAgent : AbstractAgent
     {
         protected List<Action> actionList;

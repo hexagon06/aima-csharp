@@ -5,19 +5,17 @@ using aima.core.search.framework.problem;
 
 namespace aima.core.search.framework
 {
-    /**
-     * Provides several useful static methods for implementing search.
-     * 
-     * @author Ravi Mohan
-     * @author Ruediger Lunde
-     * 
-     */
+    /// <summary>
+    /// Provides several useful static methods for implementing search.
+    /// </summary>
+    /// <author>Ravi Mohan</author>
+    /// <author>Ruediger Lunde</author>
     public class SearchUtils
     {
-        /**
-	 * Returns the list of actions corresponding to the complete path to the
-	 * given node or NoOp if path length is one.
-	 */
+        /// <summary>
+        /// Returns the list of actions corresponding to the complete path to the
+        /// given node or NoOp if path length is one.
+        /// </summary>
         public static List<Action> GetSequenceOfActions(Node node)
         {
             List<Node> nodes = node.GetPathFromRoot();
@@ -42,13 +40,17 @@ namespace aima.core.search.framework
             return actions;
         }
 
-        /** Returns an empty action list. */
+        /// <summary>
+        /// Returns an empty action list.
+        /// </summary>
         public static List<Action> Failure()
         {
             return new List<Action>();
         }
 
-        /** Checks whether a list of actions is empty. */
+        /// <summary>
+        /// Checks whether a list of actions is empty. 
+        /// </summary>
         public static bool IsFailure(List<Action> actions)
         {
             if (actions.Count == 0)
@@ -62,13 +64,12 @@ namespace aima.core.search.framework
 
         }
 
-
-        /**
-	 * Calls the goal test of the problem and - if the goal test is effectively
-	 * a {@link SolutionChecker} - additionally checks, whether the solution is
-	 * acceptable. Solution checkers can be used to analyze several or all
-	 * solutions with only one search run.
-	 */
+        /// <summary>
+        /// Calls the goal test of the problem and - if the goal test is effectively
+        /// a <see cref="ISolutionChecker"/> - additionally checks, whether the solution is
+        /// acceptable. Solution checkers can be used to analyze several or all
+        /// solutions with only one search run.
+        /// </summary>
         public static bool IsGoalState(Problem p, Node n)
         {
             bool isGoal = false;

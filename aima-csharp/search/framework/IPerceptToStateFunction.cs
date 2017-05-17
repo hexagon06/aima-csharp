@@ -4,23 +4,21 @@ using aima.core.agent;
 
 namespace aima.core.search.framework
 {
-    /**
-     * This interface is to define how to Map a Percept to a State representation
-     * for a problem solver within a specific environment. This arises in the
-     * description of the Online Search algorithms from Chapter 4.
-     * 
-     * @author Ciaran O'Reilly
-     * 
-     */
+    /// <summary>
+    /// This interface is to define how to Map a Percept to a State representation
+    /// for a problem solver within a specific environment. 
+    /// </summary>
+    /// <remarks>
+    /// This arises in the description of the Online Search algorithms from Chapter 4.
+    /// </remarks>
+    /// <author>Ciaran O'Reilly</author>
     public interface IPerceptToStateFunction
     {
-        /**
-	 * Get the problem state associated with a Percept.
-	 * 
-	 * @param p
-	 *            the percept to be transformed to a problem state.
-	 * @return a problem state derived from the Percept p.
-	 */
+        /// <summary>
+        /// Get the problem state associated with a Percept.
+        /// </summary>
+        /// <param name="p">the percept to be transformed to a problem state.</param>
+        /// <returns>a problem state derived from the Percept p.</returns>
         Object GetState(Percept p);
     }
 }

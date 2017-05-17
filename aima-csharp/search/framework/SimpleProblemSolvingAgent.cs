@@ -6,72 +6,77 @@ using aima.core.search.framework.problem;
 
 namespace aima.core.search.framework
 {
-    /**
-     * Artificial Intelligence A Modern Approach (3rd Edition): Figure 3.1, page 67.<br>
-     * <br>
-     * 
-     * <pre>
-     * function SIMPLE-PROBLEM-SOLVING-AGENT(percept) returns an action
-     *   persistent: seq, an action sequence, initially empty
-     *               state, some description of the current world state
-     *               goal, a goal, initially null
-     *               problem, a problem formulation
-     *           
-     *   state &lt;- UPDATE-STATE(state, percept)
-     *   if seq is empty then
-     *     goal    &lt;- FORMULATE-GOAL(state)
-     *     problem &lt;- FORMULATE-PROBLEM(state, goal)
-     *     seq     &lt;- SEARCH(problem)
-     *     if seq = failure then return a null action
-     *   action &lt;- FIRST(seq)
-     *   seq &lt;- REST(seq)
-     *   return action
-     * </pre>
-     * 
-     * Figure 3.1 A simple problem-solving agent. It first formulates a goal and a
-     * problem, searches for a sequence of actions that would solve the problem, and
-     * then executes the actions one at a time. When this is complete, it formulates
-     * another goal and starts over.<br>
-     * 
-     * @author Ciaran O'Reilly
-     * @author Mike Stampone
-     */
+    /// <summary>
+    /// A simple problem-solving agent. It first formulates a goal and a
+    /// problem, searches for a sequence of actions that would solve the problem, and
+    /// then executes the actions one at a time. When this is complete, it formulates
+    /// another goal and starts over.
+    /// </summary>
+    /// <remarks>
+    /// Artificial Intelligence A Modern Approach (3rd Edition): Figure 3.1, page 67.
+    /// 
+    /// 
+    /// <pre>
+    /// function SIMPLE-PROBLEM-SOLVING-AGENT(percept) returns an action
+    ///   persistent: seq, an action sequence, initially empty
+    ///               state, some description of the current world state
+    ///               goal, a goal, initially null
+    ///               problem, a problem formulation
+    ///           
+    ///   state &lt;- UPDATE-STATE(state, percept)
+    ///   if seq is empty then
+    ///     goal    &lt;- FORMULATE-GOAL(state)
+    ///     problem &lt;- FORMULATE-PROBLEM(state, goal)
+    ///     seq     &lt;- SEARCH(problem)
+    ///     if seq = failure then return a null action
+    ///   action &lt;- FIRST(seq)
+    ///   seq &lt;- REST(seq)
+    ///   return action
+    /// </pre>
+    /// 
+    /// Figure 3.1 A simple problem-solving agent. It first formulates a goal and a
+    /// problem, searches for a sequence of actions that would solve the problem, and
+    /// then executes the actions one at a time. When this is complete, it formulates
+    /// another goal and starts over.
+    /// </remarks>
+    /// <author>Ciaran O'Reilly</author>
+    /// <author>Mike Stampone</author>
     public abstract class SimpleProblemSolvingAgent : AbstractAgent
     {
-
-        // seq, an action sequence, initially empty
+        /// <summary>
+        /// seq, an action sequence, initially empty
+        /// </summary>
         private List<Action> seq = new List<Action>();
 
-        //
         private bool formulateGoalsIndefinitely = true;
 
         private int maxGoalsToFormulate = 1;
 
         private int goalsFormulated = 0;
 
-        /**
-	 * Constructs a simple problem solving agent which will formulate goals
-    	 * indefinitely.
-    	 */
+        /// <summary>
+        /// Constructs a simple problem solving agent which will formulate goals
+        /// indefinitely.</summary>
         public SimpleProblemSolvingAgent()
         {
             formulateGoalsIndefinitely = true;
         }
-
-        /**
-    	 * Constructs a simple problem solving agent which will formulate, at
-    	 * maximum, the specified number of goals.
-    	 * 
-    	 * @param maxGoalsToFormulate
-    	 *            the maximum number of goals this agent is to formulate.
-	 */
+        
+        /// <summary>
+        /// Constructs a simple problem solving agent which will formulate, at
+        /// maximum, the specified number of goals.</summary>
+        /// <param name="maxGoalsToFormulate">the maximum number of goals this agent is to formulate.</param>
         public SimpleProblemSolvingAgent(int maxGoalsToFormulate)
         {
             formulateGoalsIndefinitely = false;
             this.maxGoalsToFormulate = maxGoalsToFormulate;
         }
 
-        // function SIMPLE-PROBLEM-SOLVING-AGENT(percept) returns an action
+        /// <summary>
+        /// function SIMPLE-PROBLEM-SOLVING-AGENT(percept) returns an action
+        /// </summary>
+        /// <param name="p">perception of the environment</param>
+        /// <returns>an action</returns>
         public override Action Execute(Percept p)
         {
             Action action = NoOpAction.NO_OP;
